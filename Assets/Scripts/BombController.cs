@@ -107,4 +107,11 @@ public class BombController : MonoBehaviour
             other.isTrigger = false;
         }
     }
+
+    public void AddBomb()
+    {
+
+        bombAmount++;
+        bombsRemaining++;
+    }
 }

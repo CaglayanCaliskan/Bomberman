@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7429963849627975288}
   - component: {fileID: 2462102620696782422}
   - component: {fileID: -5798047539747431331}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ItemSpeedIncrease
   m_TagString: Untagged
   m_Icon: {fileID: 0}

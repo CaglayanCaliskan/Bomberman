@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class MovementControler : MonoBehaviour
@@ -17,6 +18,7 @@ public class MovementControler : MonoBehaviour
     public AnimatedSpriteRenderer spriteRendererDown;
     public AnimatedSpriteRenderer spriteRendererLeft;
     public AnimatedSpriteRenderer spriteRendererRight;
+    public AnimatedSpriteRenderer spriteRendererDead;
     private AnimatedSpriteRenderer activeSpriteRenderer;
 
     private void Awake()
@@ -70,6 +72,34 @@ public class MovementControler : MonoBehaviour
 
         activeSpriteRenderer = spriteRenderer;
         activeSpriteRenderer.idle = direction == Vector2.zero;
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Explosion"))
+        {
+            DeadSequence();
+        }
+    }
+    private void DeadSequence()
+    {
+        enabled = false;
+        GetComponent<BombController>().enabled = false;
+
+        spriteRendererUp.enabled = false;
+        spriteRendererDown.enabled = false;
+        spriteRendererLeft.enabled = false;
+        spriteRendererRight.enabled = false;
+        spriteRendererDead.enabled = true;
+
+        Invoke(nameof(OnDeathSequenceEnded), 1.25f);
+
+    }
+
+    private void OnDeathSequenceEnded()
+    {
+        gameObject.SetActive(false);
 
     }
 }
